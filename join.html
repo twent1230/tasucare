@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>たすケア グループへの招待</title>
+<link rel="icon" href="icon.png">
+<style>
+:root{--p:#247A66;--tint:#E6F3EF;--bg:#F4F8F6;--ink:#1F2D2A;--muted:#5A6B66;--line:#DDE9E5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;line-height:1.8;font-size:16px}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+.brand{display:flex;align-items:center;gap:12px;padding:14px 0;color:inherit;text-decoration:none}
+.brand img{width:40px;height:40px;border-radius:10px}
+.brand b{font-size:18px}
+main{padding:28px 0 48px}
+h1{font-size:26px;line-height:1.4;margin:0 0 6px}
+h2{font-size:19px;margin:32px 0 8px;padding-top:8px;border-top:1px solid var(--line)}
+h3{font-size:16px;margin:20px 0 4px}
+p,li{margin:6px 0}
+ol,ul{padding-left:1.4em}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0;background:#fff}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--tint)}
+.muted{color:var(--muted);font-size:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:16px 0}
+.btn{display:inline-block;background:var(--p);color:#fff;text-decoration:none;font-weight:700;padding:12px 22px;border-radius:14px}
+a{color:var(--p)}
+footer{border-top:1px solid var(--line);padding:20px 0 32px;font-size:13px;color:var(--muted)}
+footer a{margin-right:16px}
+.code{font-size:28px;font-weight:700;letter-spacing:.15em;color:var(--p)}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="./"><img src="icon.png" alt=""><b>たすケア</b></a></div></header>
+<main><div class="wrap">
+
+<h1>グループに招待されています</h1>
+<div class="card">
+<p>たすケアのアプリが入っていれば、下のボタンで参加できます。</p>
+<p><a id="open" class="btn" href="#">アプリで開いて参加する</a></p>
+<p class="muted" id="note">このリンクの有効期限は、作られてから3日間です。</p>
+</div>
+<h2>アプリがまだ入っていない方</h2>
+<ol>
+<li>App Storeで「たすケア」を入れる</li>
+<li>ニックネームを決めて始める</li>
+<li>もう一度、このページを開いて「アプリで開いて参加する」を押す</li>
+</ol>
+<p class="muted">招待コードをもらっている場合は、アプリの「コードで参加」からも参加できます。</p>
+<script>
+(function () {
+  var t = new URLSearchParams(location.search).get('t') || '';
+  var ok = /^[A-Za-z0-9]{24}$/.test(t);
+  var a = document.getElementById('open');
+  if (!ok) {
+    a.removeAttribute('href');
+    a.textContent = '招待リンクが正しくありません';
+    a.style.background = '#9DB0AA';
+    return;
+  }
+  a.href = 'tasucare://join/' + t;
+  // 開いたときに、自動でアプリを開いてみる
+  setTimeout(function () { location.href = a.href; }, 300);
+})();
+</script>
+
+</div></main>
+<footer><div class="wrap"><a href="./">サポート</a><a href="terms.html">利用規約</a><a href="privacy.html">プライバシーポリシー</a><div>© 2026 twent.create</div></div></footer>
+</body>
+</html>
